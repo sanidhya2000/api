@@ -8,23 +8,10 @@ const cors = require('cors');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
+app.get('/',(req,res)=>{
+  console.log("This is Working")
+})
 app.use('/product',products);
 
-app.use((res,req,next) => {
 
-  const err = new Error("NOT FOUND");
-  err.status =404;
-  next(err);
-
-});
-
-app.use((err,res,req,next) => {
-  res.status(err.status || 501);
-  res.json({
-    error:{
-      code: err.status || 501,
-      message:err.message
-    }
-  });
-});
 module.exports = app;
